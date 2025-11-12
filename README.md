@@ -5,8 +5,11 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/BkAsDrP/Softkill9000/blob/main/examples/run_in_colab.ipynb)
 
 SOFTKILL-9000 is a sophisticated multi-agent reinforcement learning framework for simulating cosmic missions with ethics-aware decision-making, advanced motion capture integration, and real-time visualization capabilities. Designed for research in multi-agent systems, motion blending AI, and kinetic ledger applications.
+
+> **🚀 Try it now!** Run the [interactive demo on Google Colab](https://colab.research.google.com/github/BkAsDrP/Softkill9000/blob/main/examples/run_in_colab.ipynb) - no installation required!
 
 ## ✨ Features
 
@@ -21,7 +24,17 @@ SOFTKILL-9000 is a sophisticated multi-agent reinforcement learning framework fo
 
 ## 🚀 Quick Start
 
-### Installation
+### Option 1: Try on Google Colab (No Installation Required!)
+
+Click the badge above or [open the interactive notebook](https://colab.research.google.com/github/BkAsDrP/Softkill9000/blob/main/examples/run_in_colab.ipynb) to:
+- Run simulations in your browser
+- Visualize agent trajectories and performance
+- Train agents with Q-learning
+- Experiment with custom configurations
+
+See [COLAB_SETUP.md](COLAB_SETUP.md) for detailed instructions.
+
+### Option 2: Local Installation
 
 ```bash
 # Clone the repository
@@ -33,23 +46,53 @@ pip install -e ".[all]"
 
 # Or install minimal version
 pip install -e .
+
+# Or install directly from GitHub
+pip install git+https://github.com/BkAsDrP/Softkill9000.git
 ```
 
 ### Basic Usage
 
 ```python
 from softkill9000 import setup_logging, MissionSimulator
+from softkill9000.agents.agent import Agent
+from softkill9000.environments.environment import CosmicScenario
 
 # Enable verbose logging
 setup_logging(verbose=True, log_file='mission.log')
 
-# Create and run simulation
-simulator = MissionSimulator()
-results = simulator.run()
+# Create agents
+agents = [
+    Agent(agent_id="Scout", role="scout"),
+    Agent(agent_id="Medic", role="medic"),
+    Agent(agent_id="Assault", role="assault")
+]
+
+# Create scenario
+scenario = CosmicScenario.generate_random(
+    width=100.0, height=100.0, num_objectives=3, num_obstacles=5
+)
+
+# Run simulation
+simulator = MissionSimulator(agents=agents, scenario=scenario, timesteps=20)
+results = simulator.run_simulation()
 
 # Access results
-print(f"Final Rewards: {results['final_rewards']}")
-print(f"Mission Log: {results['mission_log'][:5]}")
+print(f"Total Reward: {results['total_reward']:.2f}")
+print(f"Objectives Completed: {results['objectives_completed']}")
+```
+
+### Command Line Interface
+
+```bash
+# Run with default settings
+python -m softkill9000
+
+# Run with custom parameters
+python -m softkill9000 --timesteps 50 --verbose
+
+# Use custom configuration
+python -m softkill9000 --config configs/custom.yaml
 ```
 
 ### Run Interactive UI
@@ -70,6 +113,16 @@ uvicorn softkill9000.api.server:app --host 0.0.0.0 --port 8000
 ```
 
 Visit http://localhost:8000/api/docs for interactive API documentation.
+
+## 📚 Examples
+
+- **[Google Colab Demo](examples/run_in_colab.ipynb)**: Interactive notebook with complete walkthrough
+  - Installation and setup
+  - Basic and advanced simulations
+  - Visualization and analysis
+  - Q-learning training
+  - Custom configurations
+- **[Setup Guide](COLAB_SETUP.md)**: Detailed instructions for running on Google Colab
 
 ## 📦 Project Structure
 
