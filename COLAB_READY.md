@@ -27,7 +27,7 @@ print(f"✅ SOFTKILL-9000 v{softkill9000.__version__}")
 print(f"✅ NumPy {np.__version__}")
 ```
 
-**⚠️ Important**: You must restart the runtime after upgrading NumPy to avoid binary incompatibility errors.
+**Note**: The example notebook automatically restarts the runtime after upgrading NumPy. If using a custom notebook, restart manually (Runtime → Restart runtime) to avoid binary incompatibility errors.
 
 ---
 

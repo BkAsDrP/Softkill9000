@@ -15,7 +15,8 @@ This guide shows you how to run SOFTKILL-9000 in Google Colab to see your change
 
 2. **Run the Cells**:
    - Click **Runtime → Run all** or run cells individually
-   - The notebook will automatically install the package and run demonstrations
+   - The notebook will automatically install the package, upgrade NumPy, and restart the runtime
+   - After auto-restart, continue with the verification cell
 
 ### Option 2: Quick Installation in Any Colab Notebook
 
@@ -25,12 +26,16 @@ Create a new Colab notebook and run:
 # Step 1: Install SOFTKILL-9000 from GitHub
 !pip install git+https://github.com/BkAsDrP/Softkill9000.git -q
 
-# Step 2: Upgrade NumPy to resolve dependency conflicts
+# Step 2: Upgrade NumPy and auto-restart runtime
 # Colab has older NumPy by default; this fixes conflicts with jax, opencv, pytensor, thinc
 !pip install --upgrade "numpy>=2.0.0,<3.0.0" -q
 
-print("⚠️  IMPORTANT: Click 'Runtime → Restart runtime' to apply NumPy upgrade")
-print("    Then run the verification cell below after restart.")
+# The notebook will automatically restart the runtime
+# (This prevents NumPy binary incompatibility errors)
+import os, time
+print("🔄 Auto-restarting runtime...")
+time.sleep(2)
+os.kill(os.getpid(), 9)
 ```
 
 **After restarting the runtime**, run this verification cell:
