@@ -53,7 +53,7 @@ pip install git+https://github.com/BkAsDrP/Softkill9000.git
 
 > **Note for Google Colab users**: After installation, upgrade NumPy to v2.x for compatibility with modern ML libraries:
 > ```python
-> !pip install --upgrade "numpy>=2.0.0,<3.0.0"
+> !pip install --upgrade "numpy>=2.0.0,<2.3.0"
 > ```
 > Then **restart the runtime** (Runtime → Restart runtime) before importing the package.
 > See [COLAB_SETUP.md](COLAB_SETUP.md) for details.
